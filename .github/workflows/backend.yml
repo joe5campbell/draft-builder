@@ -8,11 +8,15 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Set up Node.js (if needed)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
 
     - name: Set up Python
       uses: actions/setup-python@v4
