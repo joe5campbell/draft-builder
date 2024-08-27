@@ -16,9 +16,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from . import views  # Import views from the current directory
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Hello, World!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),  # Add this line
+    path('', home),  # This will serve "Hello, World!" at the root URL
 ]
