@@ -1,8 +1,8 @@
 # games/urls.py
 from django.urls import path
-from .views import home, game_detail
+from . import views
 
 urlpatterns = [
-    path('start/', home, name='game_start'),  # This should point to the home view for starting a game
-    path('detail/<int:game_id>/', game_detail, name='game_detail'),
+    path('create_game/', views.create_game, name='create_game'),
+    path('join_game/<str:game_code>/', views.join_game, name='join_game'),
 ]

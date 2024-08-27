@@ -1,18 +1,16 @@
+from django.contrib.auth.models import User
 from django.db import models
-from django.conf import settings  # Import settings to use AUTH_USER_MODEL
+from django.conf import settings
 
 class Game(models.Model):
     name = models.CharField(max_length=100)
-    creator = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE,
-        related_name='created_games'
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    players = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, 
-        related_name='games'
-    )
+    max_players = models.IntegerField(default=8)
+    draft_settings = models.JSONField(default=dict)  # Default value for draft_settings
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    game_code = models.CharField(max_length=10, unique=True, default='TEMP')  # Temporary default to pass migrations
 
-    def __str__(self):
-        return self.name
+class GuestUser(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    guest_id = models.CharField(max_length=100)
+    guest_name = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
