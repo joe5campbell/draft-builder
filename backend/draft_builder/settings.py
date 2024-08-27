@@ -77,8 +77,16 @@ import dj_database_url
 
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://localhost')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Use 'postgresql' instead of 'postgresql_psycopg2' for Django 3.x and later
+        'NAME': 'draft_builder_db',                 # Replace with your actual database name
+        'USER': 'joecampbell',                      # Replace with your actual database username
+        'PASSWORD': 'draftBuilder62!!',       # Replace with your actual database password
+        'HOST': 'localhost',                        # Set to your database host, 'localhost' for local development
+        'PORT': '5432',                             # Default PostgreSQL port, change if needed
+    }
 }
+
 
 
 # Password validation
