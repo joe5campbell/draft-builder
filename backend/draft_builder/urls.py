@@ -24,3 +24,4 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),  # Optional, for DRF login
     path('', home, name='home'),  # Root URL path
 ]
+
