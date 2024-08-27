@@ -14,8 +14,9 @@ from pathlib import Path
 import django_heroku
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+LOGIN_URL = '/accounts/login/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -23,11 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=0p%j757aztg-cy6t*n*6&x^fu%+xhh#v9@g8%)(1vuoj3%(m5'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['draft-builder.herokuapp.com']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'draft-builder.herokuapp.com']
 
 # Application definition
 
@@ -59,8 +58,8 @@ ROOT_URLCONF = 'draft_builder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Project-level templates directory
-        'APP_DIRS': True,  # Enable app-level templates
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Ensures templates are loaded from BASE_DIR/templates
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -71,7 +70,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'draft_builder.wsgi.application'
 
@@ -139,5 +137,5 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
 
+django_heroku.settings(locals())

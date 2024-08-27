@@ -1,7 +1,7 @@
-<!-- backend/games/templates/home.html -->
+<!-- draft_builder/templates/draft_builder/home.html -->
 {% extends 'base.html' %}
 
-{% block title %}Start a New Game{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
 <h2>Start a New Game</h2>
@@ -10,4 +10,5 @@
     {{ form.as_p }}
     <button type="submit">Start Game</button>
 </form>
+<a href="{% url 'register' %}">Register</a> | <a href="{% url 'login' %}">Login</a>
 {% endblock %}

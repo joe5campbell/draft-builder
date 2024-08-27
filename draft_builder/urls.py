@@ -16,14 +16,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from games.views import game_start
-from draft_builder.views import home
+from games.views import home, game_detail  # Correct imports from games/views
 
 urlpatterns = [
+    path('', home, name='home'),  # Home page for starting a game
     path('admin/', admin.site.urls),
-    path('api/games/', include('games.urls')),
-    path('api-auth/', include('rest_framework.urls')),  # Optional, for DRF login
-    path('', home, name='home'),
-    path('game/<int:game_id>/', game_start, name='game_start'),
+    path('games/', include('games.urls')),  # Include games' URL configuration
+    path('accounts/', include('accounts.urls')),
 ]
-

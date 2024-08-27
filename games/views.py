@@ -16,7 +16,7 @@ def home(request):
     else:
         form = GameForm()
 
-    return render(request, 'home.html', {'form': form})
+    return render(request, 'draft_builder/home.html', {'form': form})
 
 def game_detail(request, game_id):
     game = get_object_or_404(Game, id=game_id)

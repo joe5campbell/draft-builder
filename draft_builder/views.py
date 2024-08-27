@@ -12,4 +12,4 @@ def home(request):
     else:
         form = GameForm()
     
-    return render(request, 'home.html', {'form': form})
+    return render(request, 'draft_builder/home.html', {'form': form}) 
