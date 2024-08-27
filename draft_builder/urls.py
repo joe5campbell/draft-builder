@@ -15,13 +15,15 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
-from django.http import HttpResponse
-
-def home(request):
-    return HttpResponse("Hello, World!")
+from django.urls import path, include
+from games.views import game_start
+from draft_builder.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),  # This will serve "Hello, World!" at the root URL
+    path('api/games/', include('games.urls')),
+    path('api-auth/', include('rest_framework.urls')),  # Optional, for DRF login
+    path('', home, name='home'),
+    path('game/<int:game_id>/', game_start, name='game_start'),
 ]
+

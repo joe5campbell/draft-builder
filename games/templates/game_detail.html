@@ -1,0 +1,9 @@
+<!-- backend/games/templates/game_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %}Game Details{% endblock %}
+
+{% block content %}
+<h1>{{ game.name }}</h1>
+<p>Created by: {{ game.creator.username }}</p>
+{% endblock %}

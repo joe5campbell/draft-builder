@@ -1,0 +1,13 @@
+<!-- backend/games/templates/game_start.html -->
+{% extends 'base.html' %}
+
+{% block title %}Start a New Game{% endblock %}
+
+{% block content %}
+    <h1>Start a New Game</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Start Game</button>
+    </form>
+{% endblock %}
