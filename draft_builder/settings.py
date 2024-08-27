@@ -58,7 +58,7 @@ ROOT_URLCONF = 'draft_builder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Ensures templates are loaded from BASE_DIR/templates
+        'DIRS': [os.path.join(BASE_DIR, 'draft_builder', 'templates')],  # Updated to include 'draft_builder'
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +70,8 @@ TEMPLATES = [
         },
     },
 ]
+
+print("Template Directory:", os.path.join(BASE_DIR, 'templates'))
 
 WSGI_APPLICATION = 'draft_builder.wsgi.application'
 
@@ -91,7 +93,9 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'accounts.draft_builder_user'
+AUTH_USER_MODEL = 'accounts.DraftBuilderUser'
+
+LOGIN_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
