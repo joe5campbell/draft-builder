@@ -1,0 +1,18 @@
+<!-- create_game.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Game</title>
+</head>
+<body>
+    <h1>Create a New Game</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Game Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="max_players">Max Players:</label>
+        <input type="number" id="max_players" name="max_players" value="8"><br><br>
+        <button type="submit">Create Game</button>
+    </form>
+</body>
+</html>
