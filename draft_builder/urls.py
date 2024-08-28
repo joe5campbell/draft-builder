@@ -16,8 +16,9 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from games.views import home, game_detail  # Correct imports from games/views
+from games import views as games_views  # Correct imports from games/views
 from django.contrib.auth import views as auth_views
+from .views import home
 
 urlpatterns = [
     path('', home, name='home'),  # Home page for starting a game
@@ -25,4 +26,6 @@ urlpatterns = [
     path('games/', include('games.urls')),  # Include games' URL configuration
     path('accounts/', include('accounts.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('create_game/', games_views.create_game, name='create_game'),
+    path('join_game/', games_views.join_game, name='join_game'),
 ]

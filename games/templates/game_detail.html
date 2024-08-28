@@ -1,9 +1,100 @@
-<!-- backend/games/templates/game_detail.html -->
 {% extends 'base.html' %}
 
 {% block title %}Game Details{% endblock %}
 
 {% block content %}
-<h1>{{ game.name }}</h1>
-<p>Created by: {{ game.creator.username }}</p>
+<div class="game-detail-container">
+    <h1 class="game-title">{{ game.name }}</h1>
+    <p class="game-creator">Created by: {{ game.creator.username }}</p>
+    
+    <!-- Additional details can be added here -->
+    <div class="game-info">
+        <h3>Game Information</h3>
+        <p>Max Players: {{ game.max_players }}</p>
+        <p>Game Code: {{ game.game_code }}</p>
+    </div>
+    
+    <!-- Players List -->
+    <div class="players-list">
+        <h3>Players in the Game:</h3>
+        <ul id="players-list">
+            {% for player in game.guestuser_set.all %}
+                <li>{{ player.guest_name }}</li>
+            {% empty %}
+                <li>No players have joined the game yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
 {% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function fetchPlayers() {
+        fetch("{% url 'game_players' game.id %}")
+            .then(response => response.json())
+            .then(data => {
+                const playersList = document.getElementById('players-list');
+                playersList.innerHTML = '';
+
+                if (data.players.length > 0) {
+                    data.players.forEach(player => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = player.guest_name;
+                        playersList.appendChild(listItem);
+                    });
+                } else {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = 'No players have joined the game yet.';
+                    playersList.appendChild(listItem);
+                }
+            })
+            .catch(error => console.error('Error fetching players:', error));
+    }
+
+    // Fetch players every 5 seconds
+    setInterval(fetchPlayers, 5000);
+</script>
+{% endblock %}
+
+<style>
+    .game-detail-container {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .game-title {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .game-creator {
+        font-style: italic;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .game-info {
+        margin-top: 20px;
+    }
+
+    .game-actions {
+        margin-top: 30px;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
